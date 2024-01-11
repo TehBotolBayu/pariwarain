@@ -1,3 +1,4 @@
-pariwarainAPI.exe
-req.txt
-./frontend/node_modules
+.gitignore
+backend/pariwarainAPI.exe
+backend/req.txt
+frontend/node_modules
