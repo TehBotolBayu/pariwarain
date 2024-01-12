@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Pariwarain</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_properties">Properties</string>
+    <string name="title_settings">Settings</string>
+    <string name="tab1">Rented Properties</string>
+    <string name="tab2">Owned Properties</string>
+</resources>
