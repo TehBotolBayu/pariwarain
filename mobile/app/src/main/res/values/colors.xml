@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="background">#F7FFFFFF</color>
+    <color name="primary">#FF0E7BFF</color>
+    <color name="text_color">#FF1E1E1E</color>
+    <color name="border1">#FFAAAAAA</color>
+    <color name="border2">#FFCCCCCC</color>
+    <color name="border3">#FFDDDDDD</color>
+    <color name="gray">#FF555555</color>
+    <color name="green">#FF61FF5D</color>
+    <color name="yellow">#FFFAFD77</color>
+    <color name="tag_off">#FFAAAAAA</color>
+    <color name="tag_on">#FF0E7BFF</color>
+</resources>
