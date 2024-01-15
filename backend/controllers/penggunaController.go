@@ -32,8 +32,7 @@ func GetPengguna(w http.ResponseWriter, r *http.Request) {
 		var name2 string
 		var name3 string
 		var name4 string
-		// var roll int
-	
+		
 		err = rows.Scan(&name, &name2, &name3, &name4)
 		utils.CheckError(err)
 	

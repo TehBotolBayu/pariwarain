@@ -28,11 +28,22 @@ func Router() {
 		case http.MethodGet:
 			controllers.GetProperti(w, r)
 		case http.MethodPost:
-			controllers.PostProperti(w, r)
+			var filename string = controllers.UploadImage(w, r)
+			controllers.PostProperti(w, r, filename)
 		case http.MethodPut:
-			controllers.PutProperti(w, r)
+			var fileUpdate string = controllers.UploadImage(w, r)
+			controllers.PutProperti(w, r, fileUpdate)
 		case http.MethodDelete:
 			controllers.DeleteProperti(w, r)
+		default:
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		}
+	})
+
+	http.HandleFunc("/upload", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodPost:
+			controllers.UploadImage(w, r)
 		default:
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}

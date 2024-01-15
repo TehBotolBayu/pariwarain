@@ -20,7 +20,7 @@ func goDotEnvVariable(key string) string {
 
 	return os.Getenv(key)
 }
- 
+
 
 func Setup() *sql.DB {
 	host     := goDotEnvVariable("host")

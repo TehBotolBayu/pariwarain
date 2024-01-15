@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "pariwarain",
+  "private_key_id": "1bf55ccd268e17d42d2ccce16a325cf8abe08083",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDV6/yqGh4ZGNCV\nw/E04F9mwS4sO2jsJm1LH2N38jDrhrWi5Ub8rVM0uppjtLPRTYwf2HCwfKb7pQ9E\nTBdP5sI9qJ177yE56GJOOQjBrhKeBYqUJtERPE2wOvTEhAhdNdNgqHqxRZdm8zG9\nAud0g9/wlBIwKNqaHE+rPht4Uc9BN5P0mareZA8mFuVuJp5D7q1LK4HqLnAIJzgz\n8hjPDpF3kxHMK4rljXBGpK2v0xVSj6764fiF7jHJ97FBNPc3746O0O2AT/CDXG2h\nY5xa2BzHe0YWN+CbeAs1AlfCFIoJ2B7FfRfyvfPUFJa65pRt7AqxPw6OaAprZsb6\nQG6prrRTAgMBAAECggEAHc7gSiORhhW7GuNOvPt2z66jbG5q1F0WZZ1eEtygjHEc\n5jHkjljoezR1RudrFwMjP1y9dxonenEpi26+4NdawZS5PQe5LYSADj5MRhCnb3V+\nNd6iyzAH80KD0M5FDBfv+EwBrKnxytqgV6IL9mRZ1AAN+L/4lfjT8RyaX02m/4Mp\nwpnYIHVm4mSx3TF5cKi7wtK5eJkkD0PCwF35RYXEC4t/5Q1zwK70hhORKRnThiVz\ng/HFQPX0qQGwFfDo6dAQamFeUAYixAF2ArufOm0NTfLyutAKrkHB57UM0+mAA4wS\nNMLc3lkFi0d7Q6cwlloDObO9JYSzOo6bHmOwsFhk4QKBgQD14khM1QRxnS2FZNE2\nuwVZvT1+KPtgN+Ai34VU+83E8/xvD9ljoOJHkibak4fQWQxNZh4ygBvkHfzzJSZy\n5r/dDCkP/oMqXl2jG6pPfTr8J7mrtxwSPg+bttPBbAYC+j2+twSxQ0N7ix2x+HmG\neArzkLJESOM19urj7aaAlIgwLQKBgQDeuRIo7t4CAwlTbLO/KcL3DpbETmn9E3NR\nxBbTM5o8uPoAWfE/bduREnTgGWguqTLSrzEukQA7iQpMar8L7APJcDdDnw3YXLgX\nN0wHD7q89zaJ82ISXYH/UZUP3I0gxCKRXy0dNE2eoEmTmW24eMcktAi6ww5ldsmM\nV6bZ5czGfwKBgQCBO14+q5L7V94OBzACsQcd5F2GimmcZ6GxEoPUZ8f9pTLe+JiM\nSYnEjidHqFSwh6z0nSBv8G84VR6WeMcdivP6bSLD2kP8J77VNHwt7SbsUsC+ZK4n\nVGEFuXDQb0M1m2qKa0zXEgBM1ZBU8sCEkWFIJJvdUeXBfjZ0d3qUh/yQPQKBgQDd\nLTjFgYDiypUmTZqqyhQdOFWsmJpUgk5Q8sQf9OzERIWwd6FF9hjHlmaObWyyecBI\nzUWwErsCZHLftFoIwtZ34oJfGsKrDFicZYOQt6QgJ/f3QsUvq8B/BktbNxDHaz9Q\n0g2BJQG390FZ3FHDkd1hq4/HuBDB3hcE0b6WQMj8jQKBgQDUHuaOj6O7KYfmEW1r\n7dUm5Ue4zJXEQhx0ZAzE7HM4cOnFsYGymh8ZKkuBpitD1cS3S5BePqpg2BAPQoFX\nnvDkh3fywjFl9AwEhRp70D2vmt8Ry/SWL+qAZpwWmhpzgALlXv2L2+6T2cpmdLBL\nyAyzdrTzi9OFLgqTMDmkVq5qiQ==\n-----END PRIVATE KEY-----\n",
+  "client_email": "pariwarain-upload@pariwarain.iam.gserviceaccount.com",
+  "client_id": "111748466603957160960",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/pariwarain-upload%40pariwarain.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
