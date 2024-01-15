@@ -1,42 +1,92 @@
 package controllers
 
-// import (
-// 	"net/http"
-// 	"fmt"
-// 	_ "github.com/lib/pq"		
-// )
+import (
+	"encoding/json"
+	"fmt"
+	"io"
+	// "mime/multipart"
+	"net/http"
+	// "time"
 
-// func handleGet(w http.ResponseWriter, r *http.Request) {
-// 	rows, err := db.Query(`SELECT "Name", "Roll" FROM "Students"`)
-// 	CheckError(err)
+	"github.com/TehBotolBayu/pariwarainAPI/utils"
+	_ "github.com/lib/pq"
+	// "google.golang.org/protobuf/types/known/timestamppb"
+)
+
+type Properti struct {
+	 Id string
+	 Foto string
+	 Judul string
+	 Alamat string
+	 Harga int64
+	 Password string
+	 Createdat string
+	 Updatedat string
+	 Pengguna_id string
+}
+
+func GetProperti(w http.ResponseWriter, r *http.Request) {
+	rows, err := db.Query(`SELECT * FROM Properti`)
+	utils.CheckError(err)
+ 
+	defer rows.Close()
+	for rows.Next() {
+		var readProperti = new(Properti)
 	
-// 	defer rows.Close()
-// 	for rows.Next() {
-// 		var name string
-// 		var roll int
+		err = rows.Scan(&readProperti.Id, &readProperti.Foto, 
+			&readProperti.Judul, &readProperti.Alamat, &readProperti.Harga, 
+			&readProperti.Password, &readProperti.Createdat, &readProperti.Updatedat, 
+			&readProperti.Pengguna_id)
+
+		utils.CheckError(err)
 	
-// 		err = rows.Scan(&name, &roll)
-// 		CheckError(err)
+		fmt.Println(readProperti.Id, readProperti.Foto, readProperti.Judul, 
+			readProperti.Alamat, readProperti.Harga, readProperti.Password, 
+			readProperti.Createdat, readProperti.Updatedat, 
+			readProperti.Pengguna_id)
+	}
 	
-// 		fmt.Println(name, roll)
-// 	}
-// 	fmt.Fprintf(w, "GET request received")
-// }
+	utils.CheckError(err)
+	
+	fmt.Fprintf(w, "GET request received")
+}
 
-// func handlePost(w http.ResponseWriter, r *http.Request) {
-// 	insertDynStmt := `insert into "Students"("Name", "Roll") values($1, $2)`
-//     _, e = db.Exec(insertDynStmt, "Jane", 2)
-// 	fmt.Fprintf(w, "POST request received")
-// }
+func PostProperti(w http.ResponseWriter, r *http.Request) {
+	body, err := io.ReadAll(r.Body)
+	if err != nil {
+		http.Error(w, "Error reading request body", http.StatusInternalServerError)
+		return
+	}
 
-// func handlePut(w http.ResponseWriter, r *http.Request) {
-// 	updateStmt := `update "Students" set "Name"=$1, "Roll"=$2 where "id"=$3`
-// 	_, e := db.Exec(updateStmt, "Mary", 3, 2)
-// 	fmt.Fprintf(w, "PUT request received")
-// }
+	var prop Properti
+	
+	json.Unmarshal(body, &prop)
 
-// func handleDelete(w http.ResponseWriter, r *http.Request) {
-// 	deleteStmt := `delete from "Students" where id=$1`
-// 	_, e := db.Exec(deleteStmt, 1)
-// 	fmt.Fprintf(w, "DELETE request received")
-// }
+	fmt.Println(prop.Id, prop.Foto, prop.Judul, prop.Alamat, prop.Harga, prop.Password, prop.Createdat, prop.Updatedat, prop.Pengguna_id)
+
+	defer r.Body.Close()
+
+	insertDynStmt := `INSERT INTO Properti( id, foto, judul, alamat, harga, password, createdat, updatedat, pengguna_id) 
+	values($1, $2, $3, $4, $5, $6, $7, $8, $9)`
+    _, e := db.Exec(insertDynStmt, prop.Id, prop.Foto, prop.Judul, prop.Alamat, prop.Harga, prop.Password, prop.Createdat, prop.Updatedat, prop.Pengguna_id)
+
+	utils.CheckError(e)
+	w.WriteHeader(http.StatusOK)
+	fmt.Fprintf(w, "POST request received")
+	
+}
+
+func PutProperti(w http.ResponseWriter, r *http.Request) {
+	updateStmt := `update "Students" set "Name"=$1, "Roll"=$2 where "id"=$3`
+	_, e := db.Exec(updateStmt, "Mary", 3, 2)
+	fmt.Fprintf(w, "PUT request received")
+	utils.CheckError(e)
+}
+
+func DeleteProperti(w http.ResponseWriter, r *http.Request) {
+	deleteStmt := `delete from "Students" where id=$1`
+	_, e := db.Exec(deleteStmt, 1)
+	fmt.Fprintf(w, "DELETE request received")
+	utils.CheckError(e)
+}
+

@@ -29,6 +29,8 @@ func Setup() *sql.DB {
     password := goDotEnvVariable("password")
     dbname   := goDotEnvVariable("dbname")
 
+    // fmt.Print(host, port, user, password)
+
         // connection string
     psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
          
@@ -37,12 +39,13 @@ func Setup() *sql.DB {
     utils.CheckError(err)
      
         // close database
-    defer db.Close()
+    // defer db.Close()
  
-        // check db
-    err = db.Ping()
-    utils.CheckError(err)
+    //     // check db
+    // err = db.Ping()
+    // utils.CheckError(err)
   
-    fmt.Println("Connected to Database!")
-	return db
+    // fmt.Println("Connected to Database!")
+
+    return db
 }
