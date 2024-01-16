@@ -23,6 +23,15 @@ func Router() {
 		}
 	})
 
+	http.HandleFunc("/login", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodPost:
+			controllers.Login(w, r)
+		default:
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		}
+	})
+
 	http.HandleFunc("/properti", func(w http.ResponseWriter, r *http.Request) {
 		switch r.Method {
 		case http.MethodGet:
@@ -35,6 +44,38 @@ func Router() {
 			controllers.PutProperti(w, r, fileUpdate)
 		case http.MethodDelete:
 			controllers.DeleteProperti(w, r)
+		default:
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		}
+	})
+
+	http.HandleFunc("/laporan", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodGet:
+			controllers.GetLaporan(w, r)
+		case http.MethodPost:
+			var filename string = controllers.UploadImage(w, r)
+			controllers.PostLaporan(w, r, filename)
+		case http.MethodPut:
+			var fileUpdate string = controllers.UploadImage(w, r)
+			controllers.PutLaporan(w, r, fileUpdate)
+		case http.MethodDelete:
+			controllers.DeleteLaporan(w, r)
+		default:
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
+		}
+	})
+
+	http.HandleFunc("/sewa", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+		case http.MethodGet:
+			controllers.GetSewa(w, r)
+		case http.MethodPost:
+			controllers.PostSewa(w, r)
+		case http.MethodPut:
+			controllers.PutSewa(w, r)
+		case http.MethodDelete:
+			controllers.DeleteLaporan(w, r)
 		default:
 			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 		}

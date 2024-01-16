@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	// "encoding/json"
+	"encoding/json"
 	"fmt"
 	// "io"
 	"strconv"
@@ -20,45 +20,57 @@ type Properti struct {
 	 Judul string
 	 Alamat string
 	 Harga int64
-	 Password string
 	 Createdat string
 	 Updatedat string
 	 Pengguna_id string
 }
 
+type DaftarProperti struct {
+	Properti []Properti
+}
+
 func GetProperti(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query(`SELECT * FROM Properti`)
 	utils.CheckError(err)
- 
 	defer rows.Close()
+ 
+	var propertiData DaftarProperti 
+
 	for rows.Next() {
 		var readProperti = new(Properti)
 	
 		err = rows.Scan(&readProperti.Id, &readProperti.Foto, 
 			&readProperti.Judul, &readProperti.Alamat, &readProperti.Harga, 
-			&readProperti.Password, &readProperti.Createdat, &readProperti.Updatedat, 
+			&readProperti.Createdat, &readProperti.Updatedat, 
 			&readProperti.Pengguna_id)
 
 		utils.CheckError(err)
+
+		propertiData.Properti = append(propertiData.Properti, *readProperti)
 	
-		fmt.Println(readProperti.Id, readProperti.Foto, readProperti.Judul, 
-			readProperti.Alamat, readProperti.Harga, readProperti.Password, 
-			readProperti.Createdat, readProperti.Updatedat, 
-			readProperti.Pengguna_id)
+		// fmt.Println(readProperti.Id, readProperti.Foto, readProperti.Judul, 
+		// 	readProperti.Alamat, readProperti.Harga, readProperti.Password, 
+		// 	readProperti.Createdat, readProperti.Updatedat, 
+		// 	readProperti.Pengguna_id)
+
 	}
+
+	jsonResponse, err := json.Marshal(propertiData)
+	if err != nil {
+		http.Error(w, "Internal Server Error", http.StatusInternalServerError)
+		return
+	}
+	// Set the Content-Type header to indicate JSON content
+	w.Header().Set("Content-Type", "application/json")
+	// Write the JSON response to the client
+	w.Write(jsonResponse)
 	
 	utils.CheckError(err)
 	
-	fmt.Fprintf(w, "GET request received")
+	// fmt.Fprintf(w, "GET request received")
 }
 
 func PostProperti(w http.ResponseWriter, r *http.Request, filename string) {
-	// body, err := io.ReadAll(r.Body)
-	// if err != nil {
-	// 	http.Error(w, "Error reading request body", http.StatusInternalServerError)
-	// 	return
-	// }
-
 	var prop Properti
 	
 	// json.Unmarshal(body, &prop)
@@ -75,18 +87,17 @@ func PostProperti(w http.ResponseWriter, r *http.Request, filename string) {
 	prop.Judul = r.FormValue("Judul")
 	prop.Alamat = r.FormValue("Alamat")
 	prop.Harga, _ = strconv.ParseInt(r.FormValue("Harga"), 10, 64)
-	prop.Password = r.FormValue("Password")
 	prop.Createdat = r.FormValue("Createdat")
 	prop.Updatedat = r.FormValue("Updatedat")
 	prop.Pengguna_id = r.FormValue("Pengguna_id")
 
-	fmt.Println(prop.Id, prop.Foto, prop.Judul, prop.Alamat, prop.Harga, prop.Password, prop.Createdat, prop.Updatedat, prop.Pengguna_id)
+	fmt.Println(prop.Id, prop.Foto, prop.Judul, prop.Alamat, prop.Harga, prop.Createdat, prop.Updatedat, prop.Pengguna_id)
 
 	defer r.Body.Close()
 
-	insertDynStmt := `INSERT INTO Properti( id, foto, judul, alamat, harga, password, createdat, updatedat, pengguna_id) 
-	values($1, $2, $3, $4, $5, $6, $7, $8, $9)`
-    _, e := db.Exec(insertDynStmt, prop.Id, prop.Foto, prop.Judul, prop.Alamat, prop.Harga, prop.Password, prop.Createdat, prop.Updatedat, prop.Pengguna_id)
+	insertDynStmt := `INSERT INTO Properti(foto, judul, alamat, harga, createdat, updatedat, penggunaId) 
+	values($1, $2, $3, $4, $5, $6, $7)`
+    _, e := db.Exec(insertDynStmt, prop.Foto, prop.Judul, prop.Alamat, prop.Harga, prop.Createdat, prop.Updatedat, prop.Pengguna_id)
 
 	utils.CheckError(e)
 	w.WriteHeader(http.StatusOK)
@@ -110,7 +121,6 @@ func PutProperti(w http.ResponseWriter, r *http.Request, filename string) {
 	prop.Judul = r.FormValue("Judul")
 	prop.Alamat = r.FormValue("Alamat")
 	prop.Harga, _ = strconv.ParseInt(r.FormValue("Harga"), 10, 64)
-	prop.Password = r.FormValue("Password")
 	prop.Createdat = r.FormValue("Createdat")
 	prop.Updatedat = r.FormValue("Updatedat")
 	prop.Pengguna_id = r.FormValue("Pengguna_id")
@@ -118,18 +128,21 @@ func PutProperti(w http.ResponseWriter, r *http.Request, filename string) {
 	var e error
 	updateStmt := `update Properti set foto=$1, judul=$2, alamat=$3, harga=$4, password=$5, updatedat=$6 where id=$7`
 	if filename == "" {
-		updateStmt = `update Properti set judul=$1, alamat=$2, harga=$3, password=$4, updatedat=$5 where id=$6`
-		_, e = db.Exec(updateStmt, prop.Judul, prop.Alamat, prop.Harga, prop.Password, prop.Updatedat, prop.Id)	
+		updateStmt = `update Properti set judul=$1, alamat=$2, harga=$3, updatedat=$4 where id=$5`
+		_, e = db.Exec(updateStmt, prop.Judul, prop.Alamat, prop.Harga, prop.Updatedat, prop.Id)	
 	} else {
-		_, e = db.Exec(updateStmt, prop.Foto, prop.Judul, prop.Alamat, prop.Harga, prop.Password, prop.Updatedat, prop.Id)
+		_, e = db.Exec(updateStmt, prop.Foto, prop.Judul, prop.Alamat, prop.Harga, prop.Updatedat, prop.Id)
 	}
 	fmt.Fprintf(w, "PUT request received")
-	utils.CheckError(e)
+	utils.CheckError(e)  
 }
 
 func DeleteProperti(w http.ResponseWriter, r *http.Request) {
-	deleteStmt := `DELETE FROM Propeti WHERE id=$1`
-	_, e := db.Exec(deleteStmt, 1)
+	queryParams := r.URL.Query()
+	id := queryParams.Get("id")
+
+	deleteStmt := `DELETE FROM Properti WHERE id=$1`
+	_, e := db.Exec(deleteStmt, id)
 	fmt.Fprintf(w, "DELETE request received")
 	utils.CheckError(e)
 }
