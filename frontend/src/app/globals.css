@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+  .bar-container{
+    @apply flex justify-between 
+    py-3 px-2 rounded-full bg-gray-900
+    mt-4 mx-2 fixed top-0 z-10 max-w-screen-xl
+    md:left-[50%] md:-translate-x-[50%] md:mx-0 
+  }
+  .searchbar{
+    @apply  
+    pl-12 bg-[url('/search.svg')] bg-left bg-no-repeat bg-contain
+    text-white bg-gray-900 md:hidden
+  }
+  .header-nav{
+    @apply text-white w-fit relative left-1/2 -translate-x-1/2
+  }
+  .header-nav > a{
+    @apply mx-5 hover:underline
+  }
+  .big-text{
+    @apply max-w-screen-xl mx-auto font-bold text-center my-10 text-xl
+  }
+  .heroimg{
+    @apply mx-2 rounded-md bg-[url('/hero.png')] md:relative
+    bg-no-repeat bg-cover bg-center h-[30vh] mt-24  md:mx-auto
+    md:h-screen md:mt-0 md:w-screen filter brightness-95
+  }
+  .hero-title{
+    @apply text-5xl font-semibold my-2
+  }
+  .hero-subtitle{
+    @apply text-2xl
+  }
+  .hero-text{
+    @apply absolute mx-auto text-center w-screen top-1/2 -translate-y-16
+  }
+  .product-container{
+    @apply w-fit bg-primaryblue 
+  }
+  .product-img{
+    @apply translate-x-2 -translate-y-2
+    object-cover object-center w-36 h-36
+  }
+  .product-label{
+    @apply p-1 w-36 
+    shadow-md  shadow-gray-600
+  }
+  .button-see{
+    @apply bg-primaryblue text-white rounded-sm
+    text-center w-full text-base py-1 text-nowrap mt-1
+  }
+  .list-container{
+    @apply flex flex-nowrap overflow-auto mx-2
+    py-1  
+  }
+  .offer-container{
+    @apply md:mx-auto flex justify-evenly mx-2
+    max-w-screen-xl md:justify-center
+  }
+  .card{
+    @apply bg-white shadow-lg shadow-gray-600
+    text-center w-40 min-h-48 p-5 mb-5 md:mx-5 h-full
+  }
+  .cardoffer-container{
+    @apply flex flex-col items-center md:flex-row md:items-start
+  }
+  .guide-container{
+    @apply bg-primaryblue py-10  md:flex justify-center
+    items-center md:pb-0 mb-0 mt-20
+  }
+  .guide-title{
+    @apply text-xl font-bold text-white text-center mb-10
+    md:translate-y-64 md:text-black md:text-4xl md:rotate-[20deg]
+  }
+  .progress-line{
+    @apply relative w-[1px] bg-blue-500 h-10 mr-2 md:h-20
+  }
+  .progress-dot{
+    @apply rounded-full w-2 h-2 bg-white -translate-x-1/2
+  }
+  .footer-container{
+    @apply bg-secondaryblue flex flex-col px-5 py-10
+    md:flex-row 
+  }
+
+}
+
+.bar-container{
+  width: calc(100% - 1rem);
+}
+
+.searchbar{
+  background-size: 12%;
+}
